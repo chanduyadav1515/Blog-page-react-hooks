@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
 import {firestore} from '../Firestore';
-
-function useFormInputs(initialState){
-    const [value,setValue] = useState(initialState);
-
-    function onChange(e){
-        setValue(e.target.value)
-    }
-    return{
-        value,
-        onChange,
-    }
-}
-
+import {useFormInputs} from './Hooks'
 
 function CreatePost() {
 
