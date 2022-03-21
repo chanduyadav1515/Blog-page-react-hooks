@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {firestore} from '../Firestore';
 
 function useFormInputs(initialState){
     const [value,setValue] = useState(initialState);
@@ -24,6 +25,13 @@ function CreatePost() {
         console.log('Title',title.value)
         console.log('Sub Title',subTitle.value)
         console.log('Content',content.value)
+
+        firestore.collection('blog-content').add({
+            title:title.value,
+            subTitle:subTitle.value,
+            content:content.value,
+            createdAt:new Date()
+        })
     }
     return (
         <div className="create-post">
