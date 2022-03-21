@@ -1,10 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+function useFormInputs(initialState){
+    const [value,setValue] = useState(initialState);
+
+    function onChange(e){
+        setValue(e.target.value)
+    }
+    return{
+        value,
+        onChange,
+    }
+}
+
 
 function CreatePost() {
+
+    const title = useFormInputs('');
+    const subTitle = useFormInputs('');
+    const content = useFormInputs('');
+    function handleButton(e){
+
+        e.preventDefault();
+        console.log('Title',title.value)
+        console.log('Sub Title',subTitle.value)
+        console.log('Content',content.value)
+    }
     return (
-        <div>
-            create post
+        <div className="create-post">
+      <h1>Create Post</h1>
+
+      <form onSubmit={handleButton}>
+        <div className="form-field">
+          <label>Title</label>
+          <input {...title} />
         </div>
+
+        <div className="form-field">
+          <label>Sub Title</label>
+          <input {...subTitle} />
+        </div>
+
+        <div className="form-field">
+          <label>Content</label>
+          <textarea {...content}></textarea>
+        </div>
+
+        <button className="create-post-btn">Create Post</button>
+      </form>
+    </div>
     );
 }
 
